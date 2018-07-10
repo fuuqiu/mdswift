@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Fuuqiu@gmail.com">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>05.闭包使用 - Swift快速开发笔记</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "05.\u95ed\u5305\u4f7f\u7528";
+    var mkdocs_page_input_path = "UI\u4e4b\u7b14/05.\u95ed\u5305\u4f7f\u7528.md";
+    var mkdocs_page_url = "/UI\u4e4b\u7b14/05.\u95ed\u5305\u4f7f\u7528/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Swift快速开发笔记</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">简介</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">UI之笔</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../00.模拟器截屏/">00.模拟器截屏</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../01.Alamofire网络请求框架/">01.Alamofire网络请求框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../02.SwiftyJSON数据解析框架/">02.SwiftyJSON数据解析框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../03.TLPhotoPicker多图选择/">03.TLPhotoPicker多图选择</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../04.表单/">04.表单</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">05.闭包使用</a>
+    <ul class="subnav">
+            
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../06.自动布局库SnapKit/">06.自动布局库SnapKit</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../07.nil、Nil、NULL、NSNull区别/">07.nil、Nil、NULL、NSNull区别</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../08.DG下拉刷新/">08.DG下拉刷新</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI01. TableView使用/">UI01. TableView使用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI02.CollectionView/">UI02.CollectionView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI03.自定义Xib/">UI03.自定义Xib</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI04.顶部菜单按钮/">UI04.顶部菜单按钮</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI05.Button/">UI05.Button</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI06.UISearchBar/">UI06.UISearchBar</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI07.导航栏/">UI07.导航栏</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI08.UIView/">UI08.UIView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI09.TabBarController/">UI09.TabBarController</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI10.CollectionView/">UI10.CollectionView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI11.键盘事件监听/">UI11.键盘事件监听</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI12.Page生命周期/">UI12.Page生命周期</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI13.WebView/">UI13.WebView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI14.ImageView/">UI14.ImageView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI15.布局尺寸示意图/">UI15.布局尺寸示意图</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Swift快速开发笔记</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>UI之笔 &raquo;</li>
+        
+      
+    
+    <li>05.闭包使用</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/fuuqiu/mdswift/edit/master/docs/UI之笔/05.闭包使用.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>闭包 closure
+闭包在Swift中应用广泛，在许多系统库方法中都能看到。
+无名
+本质是函数
+使用时注意循环引用</p>
+<p>下一级创建闭包</p>
+<pre><code class="swift">  // 1.定义一个闭包类型
+    typealias swiftBlock = (_ btnTag : Int) -&gt; Void
+
+    // 2. 声明一个变量
+    var callBack: swiftBlock?
+
+    // 3. 定义一个方法,方法的参数为和swiftBlock类型一致的闭包,并赋值给callBack
+    func callBackBlock(block: @escaping swiftBlock) {
+        callBack = block
+    }
+    //4. 调用闭包,设置你想传递的参数,调用前先判定一下,是否已实现
+        if callBack != nil {
+            callBack!(88) 
+        } 
+</code></pre>
+
+<p>闭包回调</p>
+<pre><code class="swift">//闭包
+cell.callBackBlock { (tag) in
+        print(tag) 
+    }
+</code></pre>
+
+<p>闭包基础</p>
+<pre><code class="swift">//闭包是无名的，因为他们能够从上下文中捕获变量、常量，从而应用在自身的作用区域。 
+//声明 
+var myClosure: () -&gt; String 
+//注意 () -&gt; String 实际上是一个无名函数，作为闭包变量的类型。 
+//无返回值的闭包 
+myClosure:() -&gt; Void = { print(&quot;Hello world&quot;) }
+//执行闭包 myClosure() 
+// Hello world 
+//尝试一个带参的闭包 
+var mySecondClosure: (Int , Int ) -&gt; Int = { (a: Int , b: Int) -&gt; Int in return a * b } 
+//第一次简化 类型自动推导 可以根据参数推断 
+mySecondClosure = { (a, b) in return a * b }
+//第二次简化 如果函数体只包含一句 return 代码，可省略 
+return mySecondClosure = { (a, b) in a * b }
+</code></pre>
+
+<pre><code class="swift">/*
+第三次简化 
+被捕获的参数列表中，含有a、b，下标从0开始，可通过&quot;$&quot;获取。
+
+编译器亦可通过，捕获列表自行推断出参数。
+故可省略参数列表 （a, b）和 关键字 in 
+*/
+mySecondClosure = {
+    $0 * $1
+}
+
+闭包作为函数参数
+
+/*
+operation: 是一个闭包类型的参数
+该闭包有两个参数（Int, Int） ,并有一个Int型返回值
+
+要整体看待，不要蒙圈。
+*/
+func myOpreation(_ a: Int , _ b: Int, operation: (Int , Int) -&gt; Int) -&gt; Int {
+    let res = operation(a, b)
+    return res
+}
+
+//实现一个闭包
+let multipyClosure:(Int, Int) -&gt; Int = {
+    $0 * $1
+}
+
+//等同于
+let multipyClosure = {
+    (a: Int, b: Int) in 
+    a * b
+}
+
+//下面，我们将闭包作为参数传递
+myOperation(4, 2, operation:multipyClosure)
+
+//展开 inline
+myOperation(4, 2, operation: {
+    (a: Int, b: Int) -&gt; Int in 
+    return a * b
+})
+
+
+/*
+事实上，我们并没有必要在本地定义一个闭包常量或变量，再作为参数传递。
+可以简单的在调用的地方进行声明并简化
+*/
+
+myOperation(4, 2, operation:{
+    $0 * $1
+})
+
+//进一步简化，* 操作符是一个有两个参数并返回一个结果的函数。可做如下简化:
+myOperation(4, 2, operation: *)
+
+/*
+如果闭包是作为函数的最后一个参数，可以将闭包后置到函数体外部。 
+*/
+myOperation(4, 2) {
+    $0 * $1
+}
+
+捕获
+
+闭包可以从上下文环境中捕获常量、变量，并在自己的作用域内使用。
+//eg.: 1
+var counter = 0
+let incrementCounter = {
+    counter += 1    
+}
+
+/*
+由于闭包定义和变量counter在同一作用域中，
+故闭包可以捕获并访问变量counter。
+对变量counter做的任何改变，对闭包来说都是透明可见的。
+*/
+
+incrementCounter() //1
+incrementCounter() //2
+
+//eg.: 2
+func countingClosure() -&gt; () -&gt; Int {
+    var counter = 0
+    let incrementCounter: () -&gt; Int = {
+    counter += 1
+    return counter
+    }
+    return incrementCounter
+}
+
+/*
+该例子中，闭包捕获了封闭空间（函数实体内）的内部变量counter。
+*/
+
+
+let counter1 = countingClosure()
+let counter2 = countingClosure()
+
+counter1() // 1
+counter2() // 1
+counter1() // 2
+counter1() // 3
+counter2() // 2
+</code></pre>
+
+<p>应用闭包在集合中
+排序</p>
+<pre><code class="swift">/* 数组提供了一个排序函数，sorted().使用的是默认规则，当然我们也可以定制排序规则。 */
+let names = [&quot;ZZZZZZ&quot;, &quot;BB&quot;, &quot;A&quot;, &quot;CCCC&quot;, &quot;EEEEE&quot;] names.sorted() 
+// [&quot;A&quot;, &quot;BB&quot;, &quot;CCCC&quot;, &quot;EEEEE&quot;, &quot;ZZZZZZ&quot;] //更改排序规则 其实就是利用了函数重载，具体可看函数定义 
+//sorted(by: &lt;#T##(String, String) throws -&gt; Bool#&gt;) 
+names.sorted { $0.count &gt; $1.count } // [&quot;ZZZZZZ&quot;, &quot;EEEEE&quot;, &quot;CCCC&quot;, &quot;BB&quot;, &quot;A&quot;] 
+</code></pre>
+
+<p>遍历
+集合提供了很多遍历的函数用来对元素进行访问及操作，并大量应用了闭包。
+重点需要了解的函数有: 
+forEach、filter、map、reduce
+forEach</p>
+<pre><code class="swift">/*
+循环遍历集合中的元素，相当于for-in 快速遍历    
+*/
+
+let values = [5, 3, 2, 3,1]
+values.forEach {
+    print(&quot;element is \($0)&quot;)
+}
+filter
+/*
+函数原型:
+ func filter(_ isIncluded: (Element) -&gt; Bool) -&gt; [Element]
+
+ 按照规则过滤原数组
+*/
+
+var values = [1.5, 10, 4.88, 3.2, 8]
+
+let res = values.filter {
+    return $0 &gt; 4
+}
+
+//res是移除掉小于或等于4的元素的新数组
+map
+/*
+函数原型：
+students.map(&lt;#T##transform: (String) throws -&gt; T##(String) throws -&gt; T#&gt;)
+
+数组映射
+*/
+
+let input = [&quot;0&quot;, &quot;12&quot;, &quot;name&quot;, &quot;hi&quot;, &quot;3&quot;]
+
+let number = input.map {
+    Int($0) //将元素转换为Int型
+}
+//注意类型转换可能失败，所以返回的是可选型
+//[Optional(0), Optional(12), nil, nil, Optional(3)]
+
+/*
+另外一个高度近似的函数
+flatMap
+隐含了两种操作
+1.解包
+2.展开并合并
+*/
+
+let flatNumber = input.flatMap() {
+    Int($0)
+}
+//[0, 12, 3]
+
+
+</code></pre>
+
+<p>reduce</p>
+<pre><code class="swift">/* 函数原型 reduce(&lt;#T##initialResult: Result##Result#&gt;, &lt;#T##nextPartialResult: (Result, String) throws -&gt; Result##(Result, String) throws -&gt; Result#&gt;) */ 
+//数组 
+let flatNumber = [0, 12, 3] let sum = flatNumber.reduce(0) { return $0 + $1 } 
+//15 
+//字典 
+let stock = [1.5: 5, 10: 2, 4.99: 20, 2.30: 5, 8.19: 30]
+let stockSum = stock.reduce(0) { return $0 + $1.key * Double($1.value) } 
+//384.5 
+/* 另一个reduce重载函数 注意inout 关键字，所以想想你可以怎么应用？ */
+input.reduce(into: &lt;#T##Result#&gt;) {
+    (&lt;#inout Result#&gt;, &lt;#String#&gt;) in &lt;#code#&gt;
+}
+</code></pre>
+
+<p><img alt="534d1ae2-8a26-464c-83fa-b448967de1dc.jpg" src="../../imgs/534d1ae2-8a26-464c-83fa-b448967de1dc.jpg" />
+<img alt="753d4c78-4a34-4c69-9855-d53c90072ab4.png" src="../../imgs/753d4c78-4a34-4c69-9855-d53c90072ab4.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../06.自动布局库SnapKit/" class="btn btn-neutral float-right" title="06.自动布局库SnapKit">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../04.表单/" class="btn btn-neutral" title="04.表单"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Email:Fuuqiu@gmail.com </br> 支持提供优化方案</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/fuuqiu/mdswift/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../04.表单/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../06.自动布局库SnapKit/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+
+</body>
+</html>

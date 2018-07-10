@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Fuuqiu@gmail.com">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>04.表单 - Swift快速开发笔记</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "04.\u8868\u5355";
+    var mkdocs_page_input_path = "UI\u4e4b\u7b14/04.\u8868\u5355.md";
+    var mkdocs_page_url = "/UI\u4e4b\u7b14/04.\u8868\u5355/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Swift快速开发笔记</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">简介</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">UI之笔</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../00.模拟器截屏/">00.模拟器截屏</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../01.Alamofire网络请求框架/">01.Alamofire网络请求框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../02.SwiftyJSON数据解析框架/">02.SwiftyJSON数据解析框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../03.TLPhotoPicker多图选择/">03.TLPhotoPicker多图选择</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">04.表单</a>
+    <ul class="subnav">
+            
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../05.闭包使用/">05.闭包使用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../06.自动布局库SnapKit/">06.自动布局库SnapKit</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../07.nil、Nil、NULL、NSNull区别/">07.nil、Nil、NULL、NSNull区别</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../08.DG下拉刷新/">08.DG下拉刷新</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI01. TableView使用/">UI01. TableView使用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI02.CollectionView/">UI02.CollectionView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI03.自定义Xib/">UI03.自定义Xib</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI04.顶部菜单按钮/">UI04.顶部菜单按钮</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI05.Button/">UI05.Button</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI06.UISearchBar/">UI06.UISearchBar</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI07.导航栏/">UI07.导航栏</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI08.UIView/">UI08.UIView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI09.TabBarController/">UI09.TabBarController</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI10.CollectionView/">UI10.CollectionView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI11.键盘事件监听/">UI11.键盘事件监听</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI12.Page生命周期/">UI12.Page生命周期</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI13.WebView/">UI13.WebView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI14.ImageView/">UI14.ImageView</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../UI15.布局尺寸示意图/">UI15.布局尺寸示意图</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Swift快速开发笔记</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>UI之笔 &raquo;</li>
+        
+      
+    
+    <li>04.表单</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/fuuqiu/mdswift/edit/master/docs/UI之笔/04.表单.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>回调函数</p>
+<pre><code class="swift">的onChange（）
+
+当一行的值改变时调用。您可能有兴趣调整一些参数，甚至让其他行出现或消失。
+
+onCellSelection（）
+
+每次用户点击该行时被调用并被选中。
+
+cellSetup（）
+
+当单元格首次配置时仅调用一次。在此设置永久设置。
+
+cellUpdate（）
+
+每次单元出现在屏幕上时调用。您可以使用cellSetup（）中可能不存在的变量在此处更改外观。
+
+onCellHighlightChanged（）
+
+每当单元格或任何子视图变为或退出第一个响应者时调用。
+
+onRowValidationChanged（）
+
+每当与行相关的验证错误改变时调用。
+
+onExpandInlineRow（）
+
+在扩展内联行之前调用。适用于符合InlineRowType协议的行。
+
+onCollapseInlineRow（）
+
+在折叠内联行之前调用。适用于符合InlineRowType协议的行。
+
+onPresent（）
+
+在呈现另一个视图控制器之前由一行调用。适用于符合PresenterRowType协议的行。用它来设置呈现的控制器。
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../05.闭包使用/" class="btn btn-neutral float-right" title="05.闭包使用">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../03.TLPhotoPicker多图选择/" class="btn btn-neutral" title="03.TLPhotoPicker多图选择"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Email:Fuuqiu@gmail.com </br> 支持提供优化方案</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/fuuqiu/mdswift/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../03.TLPhotoPicker多图选择/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../05.闭包使用/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+
+</body>
+</html>
