@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>System Error</title>
+        <meta name="robots" content="noindex,nofollow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <style>
+        /* Base */
+        body {
+            color: #333;
+            font: 14px Verdana, "Helvetica Neue", helvetica, Arial, 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0 20px 20px;
+            word-break: break-word;
+        }
+        h1{
+            margin: 10px 0 0;
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 32px;
+        }
+        h2{
+            color: #4288ce;
+            font-weight: 400;
+            padding: 6px 0;
+            margin: 6px 0 0;
+            font-size: 18px;
+            border-bottom: 1px solid #eee;
+        }
+        h3.subheading {
+            color: #4288ce;
+            margin: 6px 0 0;
+            font-weight: 400;
+        }
+        h3{
+            margin: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        abbr{
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        a{
+            color: #868686;
+            cursor: pointer;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        .line-error{
+            background: #f8cbcb;
+        }
+
+        .echo table {
+            width: 100%;
+        }
+
+        .echo pre {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f7f7f7;
+            border: 0;
+            border-radius: 3px;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+
+        .echo pre > pre {
+            padding: 0;
+            margin: 0;
+        }
+        /* Layout */
+        .col-md-3 {
+            width: 25%;
+        }
+        .col-md-9 {
+            width: 75%;
+        }
+        [class^="col-md-"] {
+            float: left;
+        }
+        .clearfix {
+            clear:both;
+        }
+        @media only screen 
+        and (min-device-width : 375px) 
+        and (max-device-width : 667px) { 
+            .col-md-3,
+            .col-md-9 {
+                width: 100%;
+            }
+        }
+        /* Exception Info */
+        .exception {
+            margin-top: 20px;
+        }
+        .exception .message{
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-bottom: 0 none;
+            line-height: 18px;
+            font-size:16px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            font-family: Consolas,"Liberation Mono",Courier,Verdana,"微软雅黑";
+        }
+
+        .exception .code{
+            float: left;
+            text-align: center;
+            color: #fff;
+            margin-right: 12px;
+            padding: 16px;
+            border-radius: 4px;
+            background: #999;
+        }
+        .exception .source-code{
+            padding: 6px;
+            border: 1px solid #ddd;
+
+            background: #f9f9f9;
+            overflow-x: auto;
+
+        }
+        .exception .source-code pre{
+            margin: 0;
+        }
+        .exception .source-code pre ol{
+            margin: 0;
+            color: #4288ce;
+            display: inline-block;
+            min-width: 100%;
+            box-sizing: border-box;
+        font-size:14px;
+            font-family: "Century Gothic",Consolas,"Liberation Mono",Courier,Verdana;
+            padding-left: 56px;
+        }
+        .exception .source-code pre li{
+            border-left: 1px solid #ddd;
+            height: 18px;
+            line-height: 18px;
+        }
+        .exception .source-code pre code{
+            color: #333;
+            height: 100%;
+            display: inline-block;
+            border-left: 1px solid #fff;
+        font-size:14px;
+            font-family: Consolas,"Liberation Mono",Courier,Verdana,"微软雅黑";
+        }
+        .exception .trace{
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-top: 0 none;
+            line-height: 16px;
+        font-size:14px;
+            font-family: Consolas,"Liberation Mono",Courier,Verdana,"微软雅黑";
+        }
+        .exception .trace ol{
+            margin: 12px;
+        }
+        .exception .trace ol li{
+            padding: 2px 4px;
+        }
+        .exception div:last-child{
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Exception Variables */
+        .exception-var table{
+            width: 100%;
+            margin: 12px 0;
+            box-sizing: border-box;
+            table-layout:fixed;
+            word-wrap:break-word;            
+        }
+        .exception-var table caption{
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 6px 0;
+        }
+        .exception-var table caption small{
+            font-weight: 300;
+            display: inline-block;
+            margin-left: 10px;
+            color: #ccc;
+        }
+        .exception-var table tbody{
+            font-size: 13px;
+            font-family: Consolas,"Liberation Mono",Courier,"微软雅黑";
+        }
+        .exception-var table td{
+            padding: 0 6px;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        .exception-var table td:first-child{
+            width: 28%;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .exception-var table td pre{
+            margin: 0;
+        }
+
+        /* Copyright Info */
+        .copyright{
+            margin-top: 24px;
+            padding: 12px 0;
+            border-top: 1px solid #eee;
+        }
+
+        /* SPAN elements with the classes below are added by prettyprint. */
+        pre.prettyprint .pln { color: #000 }  /* plain text */
+        pre.prettyprint .str { color: #080 }  /* string content */
+        pre.prettyprint .kwd { color: #008 }  /* a keyword */
+        pre.prettyprint .com { color: #800 }  /* a comment */
+        pre.prettyprint .typ { color: #606 }  /* a type name */
+        pre.prettyprint .lit { color: #066 }  /* a literal value */
+        /* punctuation, lisp open bracket, lisp close bracket */
+        pre.prettyprint .pun, pre.prettyprint .opn, pre.prettyprint .clo { color: #660 }
+        pre.prettyprint .tag { color: #008 }  /* a markup tag name */
+        pre.prettyprint .atn { color: #606 }  /* a markup attribute name */
+        pre.prettyprint .atv { color: #080 }  /* a markup attribute value */
+        pre.prettyprint .dec, pre.prettyprint .var { color: #606 }  /* a declaration; a variable name */
+        pre.prettyprint .fun { color: red }  /* a function name */
+    </style>
+    </head>
+    <body>
+        <div class="echo">
+            </div>
+        <div class="exception">
+            <div class="message">
+                <div class="info">
+                    <div>
+                        <h2>[10501] 
+                            <abbr title="think\exception\PDOException">PDOException</abbr> in
+                            <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\db\Connection.php line 388">Connection.php line 388</a>
+                        </h2>
+                    </div>
+                    <div>
+                        <h1>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'type' in 'where clause'</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="source-code">
+                <pre class="prettyprint lang-php">
+                    <ol start="379">
+                        <li class="line-379">
+                            <code>            $this-&gt;PDOStatement-&gt;execute();
+</code>
+                        </li>
+                        <li class="line-380">
+                            <code>            // 调试结束
+</code>
+                        </li>
+                        <li class="line-381">
+                            <code>            $this-&gt;debug(false);
+</code>
+                        </li>
+                        <li class="line-382">
+                            <code>            // 返回结果集
+</code>
+                        </li>
+                        <li class="line-383">
+                            <code>            return $this-&gt;getResult($pdo, $procedure);
+</code>
+                        </li>
+                        <li class="line-384">
+                            <code>        } catch (\PDOException $e) {
+</code>
+                        </li>
+                        <li class="line-385">
+                            <code>            if ($this-&gt;isBreak($e)) {
+</code>
+                        </li>
+                        <li class="line-386">
+                            <code>                return $this-&gt;close()-&gt;query($sql, $bind, $master, $pdo);
+</code>
+                        </li>
+                        <li class="line-387">
+                            <code>            }
+</code>
+                        </li>
+                        <li class="line-388">
+                            <code>            throw new PDOException($e, $this-&gt;config, $this-&gt;getLastsql());
+</code>
+                        </li>
+                        <li class="line-389">
+                            <code>        } catch (\Exception $e) {
+</code>
+                        </li>
+                        <li class="line-390">
+                            <code>            if ($this-&gt;isBreak($e)) {
+</code>
+                        </li>
+                        <li class="line-391">
+                            <code>                return $this-&gt;close()-&gt;query($sql, $bind, $master, $pdo);
+</code>
+                        </li>
+                        <li class="line-392">
+                            <code>            }
+</code>
+                        </li>
+                        <li class="line-393">
+                            <code>            throw $e;
+</code>
+                        </li>
+                        <li class="line-394">
+                            <code>        }
+</code>
+                        </li>
+                        <li class="line-395">
+                            <code>    }
+</code>
+                        </li>
+                        <li class="line-396">
+                            <code>
+</code>
+                        </li>
+                        <li class="line-397">
+                            <code>    /**
+</code>
+                        </li>
+                    </ol>
+                </pre>
+            </div>
+            <div class="trace">
+                <h2>Call Stack</h2>
+                <ol>
+                    <li>in 
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\db\Connection.php line 388">Connection.php line 388</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="think\db\Connection">Connection</abbr>->query('
+                        <a class="toggle" title="SELECT * FROM `medicine_check_log` WHERE  (  user_id=114 and type='mobile' and product_id=8145 ) LIMIT 1  ">SELECT * FROM `medic...</a>', [],
+                        <em>false</em>,
+                        <em>false</em>) in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\db\Query.php line 228">Query.php line 228</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="think\db\Query">Query</abbr>->query('
+                        <a class="toggle" title="SELECT * FROM `medicine_check_log` WHERE  (  user_id=114 and type='mobile' and product_id=8145 ) LIMIT 1  ">SELECT * FROM `medic...</a>', [],
+                        <em>false</em>,
+                        <em>false</em>) in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\db\Query.php line 2479">Query.php line 2479</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="think\db\Query">Query</abbr>->find() in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\application\api\controller\v1\Index.php line 109">Index.php line 109</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="app\api\controller\v1\Index">Index</abbr>->visitInc('mobile', 114, 8145, '测试')
+                    </li>
+                    <li>
+                at 
+                        <abbr title="ReflectionMethod">ReflectionMethod</abbr>->invokeArgs(
+                        <em>object</em>(
+                        <abbr title="app\api\controller\v1\Index">Index</abbr>), ['mobile', 114, 8145, ...]) in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\App.php line 197">App.php line 197</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="think\App">App</abbr>::invokeMethod([
+                        <em>object</em>(
+                        <abbr title="app\api\controller\v1\Index">Index</abbr>), 'visitinc'], []) in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\App.php line 411">App.php line 411</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="think\App">App</abbr>::module(['api', 'v1.Index', 'visitInc'], ['app_host' => '', 'app_debug' =>
+                        <em>true</em>, 'app_trace' =>
+                        <em>true</em>, ...],
+                        <em>null</em>) in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\App.php line 296">App.php line 296</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="think\App">App</abbr>::exec(['type' => 'module', 'module' => ['api', 'v1.Index', 'visitInc']], ['app_host' => '', 'app_debug' =>
+                        <em>true</em>, 'app_trace' =>
+                        <em>true</em>, ...]) in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\library\think\App.php line 124">App.php line 124</a>
+                    </li>
+                    <li>
+                at 
+                        <abbr title="think\App">App</abbr>::run() in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\start.php line 18">start.php line 18</a>
+                    </li>
+                    <li>
+                at require('
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\thinkphp\start.php">D:\wamp\www\medicine...</a>') in
+                        <a class="toggle" title="D:\wamp\www\medicine_platform\public\index.php line 21">index.php line 21</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="exception-var">
+            <h2>Exception Datas</h2>
+            <table>
+                <caption>PDO Error Info</caption>
+                <tbody>
+                    <tr>
+                        <td>SQLSTATE</td>
+                        <td>
+                        42S22                    </td>
+                    </tr>
+                    <tr>
+                        <td>Driver Error Code</td>
+                        <td>
+                        1054                    </td>
+                    </tr>
+                    <tr>
+                        <td>Driver Error Message</td>
+                        <td>
+                        Unknown column 'type' in 'where clause'                    </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <caption>Database Status</caption>
+                <tbody>
+                    <tr>
+                        <td>Error Code</td>
+                        <td>
+                        10501                    </td>
+                    </tr>
+                    <tr>
+                        <td>Error Message</td>
+                        <td>
+                        SQLSTATE[42S22]: Column not found: 1054 Unknown column 'type' in 'where clause'                    </td>
+                    </tr>
+                    <tr>
+                        <td>Error SQL</td>
+                        <td>
+                        SELECT * FROM `medicine_check_log` WHERE  (  user_id=114 and type='mobile' and product_id=8145 ) LIMIT 1                    </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <caption>Database Config</caption>
+                <tbody>
+                    <tr>
+                        <td>type</td>
+                        <td>
+                        mysql                    </td>
+                    </tr>
+                    <tr>
+                        <td>hostname</td>
+                        <td>
+                        localhost                    </td>
+                    </tr>
+                    <tr>
+                        <td>database</td>
+                        <td>
+                        medicine_platform                    </td>
+                    </tr>
+                    <tr>
+                        <td>hostport</td>
+                        <td>
+                        3306                    </td>
+                    </tr>
+                    <tr>
+                        <td>dsn</td>
+                        <td>
+                                            </td>
+                    </tr>
+                    <tr>
+                        <td>params</td>
+                        <td>
+                        []                    </td>
+                    </tr>
+                    <tr>
+                        <td>charset</td>
+                        <td>
+                        utf8                    </td>
+                    </tr>
+                    <tr>
+                        <td>prefix</td>
+                        <td>
+                        medicine_                    </td>
+                    </tr>
+                    <tr>
+                        <td>debug</td>
+                        <td>
+                        true                    </td>
+                    </tr>
+                    <tr>
+                        <td>deploy</td>
+                        <td>
+                        0                    </td>
+                    </tr>
+                    <tr>
+                        <td>rw_separate</td>
+                        <td>
+                        false                    </td>
+                    </tr>
+                    <tr>
+                        <td>master_num</td>
+                        <td>
+                        1                    </td>
+                    </tr>
+                    <tr>
+                        <td>slave_no</td>
+                        <td>
+                                            </td>
+                    </tr>
+                    <tr>
+                        <td>fields_strict</td>
+                        <td>
+                        true                    </td>
+                    </tr>
+                    <tr>
+                        <td>result_type</td>
+                        <td>
+                        2                    </td>
+                    </tr>
+                    <tr>
+                        <td>resultset_type</td>
+                        <td>
+                        array                    </td>
+                    </tr>
+                    <tr>
+                        <td>auto_timestamp</td>
+                        <td>
+                        false                    </td>
+                    </tr>
+                    <tr>
+                        <td>datetime_format</td>
+                        <td>
+                        Y-m-d H:i:s                    </td>
+                    </tr>
+                    <tr>
+                        <td>sql_explain</td>
+                        <td>
+                        false                    </td>
+                    </tr>
+                    <tr>
+                        <td>builder</td>
+                        <td>
+                                            </td>
+                    </tr>
+                    <tr>
+                        <td>query</td>
+                        <td>
+                        \think\db\Query                    </td>
+                    </tr>
+                    <tr>
+                        <td>break_reconnect</td>
+                        <td>
+                        false                    </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="exception-var">
+            <h2>Environment Variables</h2>
+            <div>
+                <div class="clearfix">
+                    <div class="col-md-3">
+                        <strong>GET Data</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <small>empty</small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="clearfix">
+                    <div class="col-md-3">
+                        <strong>POST Data</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <small>empty</small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="clearfix">
+                    <div class="col-md-3">
+                        <strong>Files</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <small>empty</small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="clearfix">
+                    <div class="col-md-3">
+                        <strong>Cookies</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <small>empty</small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="clearfix">
+                    <div class="col-md-3">
+                        <strong>Session</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <small>empty</small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="subheading">Server/Request Data</h3>
+                <div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REDIRECT_STATUS</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        200                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CONTENT_TYPE</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        application/json                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>HTTP_CACHE_CONTROL</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        no-cache                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>HTTP_POSTMAN_TOKEN</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        b00180dc-88b1-42a2-b727-0bc58abed162                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>HTTP_USER_AGENT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        PostmanRuntime/7.1.5                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>HTTP_ACCEPT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        */*                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>HTTP_HOST</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        112.117.211.91:8082                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>HTTP_ACCEPT_ENCODING</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        gzip, deflate                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CONTENT_LENGTH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        77                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>HTTP_CONNECTION</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        keep-alive                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_131\bin;C:\Program Files\Java\jdk1.8.0_131\jre\bin;D:\ffmpeg\bin;C:\Program Files\Git\cmd;D:\Git\NSSM\win64;C:\Program Files\Git\usr\bin                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SystemRoot</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        C:\Windows                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>COMSPEC</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        C:\Windows\system32\cmd.exe                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>PATHEXT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>WINDIR</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        C:\Windows                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SERVER_SIGNATURE</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        &lt;address&gt;Apache/2.4.9 (Win64) OpenSSL/1.0.1g PHP/5.5.12 Server at 112.117.211.91 Port 8082&lt;/address&gt;
+                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SERVER_SOFTWARE</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        Apache/2.4.9 (Win64) OpenSSL/1.0.1g PHP/5.5.12                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SERVER_NAME</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        112.117.211.91                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SERVER_ADDR</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        172.16.27.12                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SERVER_PORT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        8082                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REMOTE_ADDR</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        116.249.60.31                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>DOCUMENT_ROOT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:/wamp/www/medicine_platform/public                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REQUEST_SCHEME</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        http                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CONTEXT_PREFIX</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                                            </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CONTEXT_DOCUMENT_ROOT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:/wamp/www/medicine_platform/public                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SERVER_ADMIN</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        admin@example.com                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SCRIPT_FILENAME</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:/wamp/www/medicine_platform/public/index.php                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REMOTE_PORT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        12641                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REDIRECT_QUERY_STRING</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        s=/api/v1.Index/visitInc                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REDIRECT_URL</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        /api/v1.Index/visitInc                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>GATEWAY_INTERFACE</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        CGI/1.1                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SERVER_PROTOCOL</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        HTTP/1.1                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REQUEST_METHOD</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        POST                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>QUERY_STRING</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        s=/api/v1.Index/visitInc                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REQUEST_URI</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        /api/v1.Index/visitInc                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SCRIPT_NAME</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        /index.php                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>PHP_SELF</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        /index.php                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REQUEST_TIME_FLOAT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        1531200175.03                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>REQUEST_TIME</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        1531200175                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>PATH_INFO</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        /api/v1.Index/visitInc                    </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="clearfix">
+                    <div class="col-md-3">
+                        <strong>Environment Variables</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <small>empty</small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="subheading">ThinkPHP Constants</h3>
+                <div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>APP_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\public/../application/                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>UPLOAD_ROOT_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        /uploads/                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>SESSION_USER_INFO</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        user                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>THINK_VERSION</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        5.0.11                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>THINK_START_TIME</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        1531200175.0322                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>THINK_START_MEM</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        283648                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>EXT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        .php                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>DS</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        \                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>THINK_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\thinkphp\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>LIB_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\thinkphp\library\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CORE_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\thinkphp\library\think\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>TRAIT_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\thinkphp\library\traits\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>ROOT_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>EXTEND_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\extend\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>VENDOR_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\vendor\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>RUNTIME_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\runtime\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>LOG_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\runtime\log\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CACHE_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\runtime\cache\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>TEMP_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\runtime\temp\                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CONF_PATH</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        D:\wamp\www\medicine_platform\public/../application/                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>CONF_EXT</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        .php                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>ENV_PREFIX</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        PHP_                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>IS_CLI</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        false                    </small>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-md-3">
+                            <strong>IS_WIN</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <small>
+                        true                    </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 
+    <div class="copyright"><a title="官方网站" href="http://www.thinkphp.cn">ThinkPHP</a><span>V5.0.11</span><span>{ 十年磨一剑-为API开发设计的高性能框架 }</span></div>
+     -->
+        <script>
+        var LINE = 388;
+
+        function $(selector, node){
+            var elements;
+
+            node = node || document;
+            if(document.querySelectorAll){
+                elements = node.querySelectorAll(selector);
+            } else {
+                switch(selector.substr(0, 1)){
+                    case '#':
+                        elements = [node.getElementById(selector.substr(1))];
+                        break;
+                    case '.':
+                        if(document.getElementsByClassName){
+                            elements = node.getElementsByClassName(selector.substr(1));
+                        } else {
+                            elements = get_elements_by_class(selector.substr(1), node);
+                        }
+                        break;
+                    default:
+                        elements = node.getElementsByTagName();
+                }
+            }
+            return elements;
+
+            function get_elements_by_class(search_class, node, tag) {
+                var elements = [], eles, 
+                    pattern  = new RegExp('(^|\\s)' + search_class + '(\\s|$)');
+
+                node = node || document;
+                tag  = tag  || '*';
+
+                eles = node.getElementsByTagName(tag);
+                for(var i = 0; i < eles.length; i++) {
+                    if(pattern.test(eles[i].className)) {
+                        elements.push(eles[i])
+                    }
+                }
+
+                return elements;
+            }
+        }
+
+        $.getScript = function(src, func){
+            var script = document.createElement('script');
+            
+            script.async  = 'async';
+            script.src    = src;
+            script.onload = func || function(){};
+            
+            $('head')[0].appendChild(script);
+        }
+
+        ;(function(){
+            var files = $('.toggle');
+            var ol    = $('ol', $('.prettyprint')[0]);
+            var li    = $('li', ol[0]);   
+
+            // 短路径和长路径变换
+            for(var i = 0; i < files.length; i++){
+                files[i].ondblclick = function(){
+                    var title = this.title;
+
+                    this.title = this.innerHTML;
+                    this.innerHTML = title;
+                }
+            }
+
+            // 设置出错行
+            var err_line = $('.line-' + LINE, ol[0])[0];
+            err_line.className = err_line.className + ' line-error';
+
+            $.getScript('//cdn.bootcss.com/prettify/r298/prettify.min.js', function(){
+                prettyPrint();
+
+                // 解决Firefox浏览器一个很诡异的问题
+                // 当代码高亮后，ol的行号莫名其妙的错位
+                // 但是只要刷新li里面的html重新渲染就没有问题了
+                if(window.navigator.userAgent.indexOf('Firefox') >= 0){
+                    ol[0].innerHTML = ol[0].innerHTML;
+                }
+            });
+
+        })();
+    
+        </script>
+        <div id="think_page_trace" style="position: fixed;bottom:0;right:0;font-size:14px;width:100%;z-index: 999999;color: #000;text-align:left;font-family:'微软雅黑';">
+            <div id="think_page_trace_tab" style="display: none;background:white;margin:0;height: 250px;">
+                <div id="think_page_trace_tab_tit" style="height:30px;padding: 6px 12px 0;border-bottom:1px solid #ececec;border-top:1px solid #ececec;font-size:16px">
+                    <span style="color:#000;padding-right:12px;height:30px;line-height:30px;display:inline-block;margin-right:3px;cursor:pointer;font-weight:700">基本</span>
+                    <span style="color:#000;padding-right:12px;height:30px;line-height:30px;display:inline-block;margin-right:3px;cursor:pointer;font-weight:700">文件</span>
+                    <span style="color:#000;padding-right:12px;height:30px;line-height:30px;display:inline-block;margin-right:3px;cursor:pointer;font-weight:700">流程</span>
+                    <span style="color:#000;padding-right:12px;height:30px;line-height:30px;display:inline-block;margin-right:3px;cursor:pointer;font-weight:700">错误</span>
+                    <span style="color:#000;padding-right:12px;height:30px;line-height:30px;display:inline-block;margin-right:3px;cursor:pointer;font-weight:700">SQL</span>
+                    <span style="color:#000;padding-right:12px;height:30px;line-height:30px;display:inline-block;margin-right:3px;cursor:pointer;font-weight:700">调试</span>
+                </div>
+                <div id="think_page_trace_tab_cont" style="overflow:auto;height:212px;padding:0;line-height: 24px">
+                    <div style="display:none;">
+                        <ol style="padding: 0; margin:0">
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">请求信息 : 2018-07-10 13:22:55 HTTP/1.1 POST : 112.117.211.91:8082/api/v1.Index/visitInc</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">运行时间 : 0.086005s [ 吞吐率：11.63req/s ] 内存消耗：4,686.69kb 文件加载：61</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">查询信息 : 4 queries 0 writes </li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">缓存信息 : 0 reads,0 writes</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">配置加载 : 70</li>
+                        </ol>
+                    </div>
+                    <div style="display:none;">
+                        <ol style="padding: 0; margin:0">
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\public\index.php ( 0.86 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\start.php ( 0.71 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\base.php ( 2.60 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Loader.php ( 19.57 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\composer\autoload_namespaces.php ( 0.21 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\composer\autoload_psr4.php ( 1.50 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\composer\autoload_classmap.php ( 45.29 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\composer\autoload_files.php ( 0.71 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\topthink\think-helper\src\helper.php ( 2.88 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\symfony\polyfill-mbstring\bootstrap.php ( 4.29 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\topthink\think-queue\src\common.php ( 1.19 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Console.php ( 21.22 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\topthink\think-migration\src\config.php ( 0.83 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\topthink\think-testing\src\config.php ( 0.65 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\vendor\topthink\think-captcha\src\helper.php ( 1.59 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Route.php ( 60.15 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Config.php ( 6.33 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Validate.php ( 40.60 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Error.php ( 3.70 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\convention.php ( 10.10 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\App.php ( 20.69 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Request.php ( 49.97 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\config.php ( 9.67 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\database.php ( 1.99 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\extra\queue.php ( 0.62 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\extra\secure.php ( 0.06 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\extra\setting.php ( 0.15 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Hook.php ( 4.76 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\tags.php ( 0.98 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\common.php ( 9.68 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Env.php ( 1.25 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\helper.php ( 17.30 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Debug.php ( 7.06 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\api\behavior\CORS.php ( 0.41 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Log.php ( 5.84 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Lang.php ( 7.13 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\lang\zh-cn.php ( 3.85 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\route.php ( 1.05 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\api\common.php ( 0.45 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\api\controller\v1\Index.php ( 5.93 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\common\controller\ApiBase.php ( 0.24 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\common\controller\Base.php ( 0.52 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Controller.php ( 6.20 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\traits\controller\Jump.php ( 4.79 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\View.php ( 6.86 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\view\driver\Think.php ( 5.61 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Template.php ( 46.16 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\template\driver\File.php ( 2.24 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Db.php ( 6.60 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\db\connector\Mysql.php ( 4.02 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\db\Connection.php ( 30.00 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\db\Query.php ( 92.59 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\db\builder\Mysql.php ( 2.16 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\db\Builder.php ( 31.15 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\exception\PDOException.php ( 1.43 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\exception\DbException.php ( 1.37 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Exception.php ( 1.62 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\exception\Handle.php ( 8.72 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\application\tpl\exception.html ( 18.33 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Response.php ( 8.66 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\debug\Html.php ( 4.27 KB )</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">D:\wamp\www\medicine_platform\thinkphp\library\think\Cache.php ( 6.17 KB )</li>
+                        </ol>
+                    </div>
+                    <div style="display:none;">
+                        <ol style="padding: 0; margin:0">
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ BEHAVIOR ] Run app\api\behavior\CORS @app_init [ RunTime:0.000000s ]</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ LANG ] D:\wamp\www\medicine_platform\thinkphp\lang\zh-cn.php</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ ROUTE ] array (
+  'type' =&gt; 'module',
+  'module' =&gt; 
+  array (
+    0 =&gt; 'api',
+    1 =&gt; 'v1.Index',
+    2 =&gt; 'visitInc',
+  ),
+)</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ HEADER ] array (
+  'content-type' =&gt; 'application/json',
+  'cache-control' =&gt; 'no-cache',
+  'postman-token' =&gt; 'b00180dc-88b1-42a2-b727-0bc58abed162',
+  'user-agent' =&gt; 'PostmanRuntime/7.1.5',
+  'accept' =&gt; '*/*',
+  'host' =&gt; '112.117.211.91:8082',
+  'accept-encoding' =&gt; 'gzip, deflate',
+  'content-length' =&gt; '77',
+  'connection' =&gt; 'keep-alive',
+)</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ PARAM ] array (
+  'type' =&gt; 'mobile',
+  'user_id' =&gt; 114,
+  'product_id' =&gt; 8145,
+  'keyword' =&gt; '测试',
+)</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ DB ] INIT mysql</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ RUN ] app\api\controller\v1\Index-&gt;visitInc[ D:\wamp\www\medicine_platform\application\api\controller\v1\Index.php ]</li>
+                        </ol>
+                    </div>
+                    <div style="display:none;">
+                        <ol style="padding: 0; margin:0">
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[10501]SQLSTATE[42S22]: Column not found: 1054 Unknown column 'type' in 'where clause'[D:\wamp\www\medicine_platform\thinkphp\library\think\db\Connection.php:388]</li>
+                        </ol>
+                    </div>
+                    <div style="display:none;">
+                        <ol style="padding: 0; margin:0">
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ DB ] CONNECT:[ UseTime:0.011001s ] mysql:host=localhost;port=3306;dbname=medicine_platform;charset=utf8</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ SQL ] SHOW COLUMNS FROM `medicine_admin_config` [ RunTime:0.006000s ]</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ SQL ] SELECT `enname`,`value` FROM `medicine_admin_config` [ RunTime:0.001000s ]</li>
+                            <li style="border-bottom:1px solid #EEE;font-size:14px;padding:0 12px">[ SQL ] SHOW COLUMNS FROM `medicine_check_log` [ RunTime:0.005000s ]</li>
+                        </ol>
+                    </div>
+                    <div style="display:none;">
+                        <ol style="padding: 0; margin:0">
+                                    </ol>
+                    </div>
+                </div>
+            </div>
+            <div id="think_page_trace_close" style="display:none;text-align:right;height:15px;position:absolute;top:10px;right:12px;cursor:pointer;">
+                <img style="vertical-align:top;" src="data:image/gif;base64,R0lGODlhDwAPAJEAAAAAAAMDA////wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MUQxMjc1MUJCQUJDMTFFMTk0OUVGRjc3QzU4RURFNkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MUQxMjc1MUNCQUJDMTFFMTk0OUVGRjc3QzU4RURFNkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxRDEyNzUxOUJBQkMxMUUxOTQ5RUZGNzdDNThFREU2QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxRDEyNzUxQUJBQkMxMUUxOTQ5RUZGNzdDNThFREU2QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAAAAAAALAAAAAAPAA8AAAIdjI6JZqotoJPR1fnsgRR3C2jZl3Ai9aWZZooV+RQAOw==" />
+            </div>
+        </div>
+        <div id="think_page_trace_open" style="height:30px;float:right;text-align:right;overflow:hidden;position:fixed;bottom:0;right:0;color:#000;line-height:30px;cursor:pointer;">
+            <div style="background:#232323;color:#FFF;padding:0 6px;float:right;line-height:30px;font-size:14px">0.092005s </div>
+            <img width="30" style="" title="ShowPageTrace" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVERDVENkZGQjkyNDExRTE5REY3RDQ5RTQ2RTRDQUJCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVERDVENzAwQjkyNDExRTE5REY3RDQ5RTQ2RTRDQUJCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NURENUQ2RkRCOTI0MTFFMTlERjdENDlFNDZFNENBQkIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NURENUQ2RkVCOTI0MTFFMTlERjdENDlFNDZFNENBQkIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5fx6IRAAAMCElEQVR42sxae3BU1Rk/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">
+        </div>
+        <script type="text/javascript">
+    (function(){
+        var tab_tit  = document.getElementById('think_page_trace_tab_tit').getElementsByTagName('span');
+        var tab_cont = document.getElementById('think_page_trace_tab_cont').getElementsByTagName('div');
+        var open     = document.getElementById('think_page_trace_open');
+        var close    = document.getElementById('think_page_trace_close').children[0];
+        var trace    = document.getElementById('think_page_trace_tab');
+        var cookie   = document.cookie.match(/thinkphp_show_page_trace=(\d\|\d)/);
+        var history  = (cookie && typeof cookie[1] != 'undefined' && cookie[1].split('|')) || [0,0];
+        open.onclick = function(){
+            trace.style.display = 'block';
+            this.style.display = 'none';
+            close.parentNode.style.display = 'block';
+            history[0] = 1;
+            document.cookie = 'thinkphp_show_page_trace='+history.join('|')
+        }
+        close.onclick = function(){
+            trace.style.display = 'none';
+            this.parentNode.style.display = 'none';
+            open.style.display = 'block';
+            history[0] = 0;
+            document.cookie = 'thinkphp_show_page_trace='+history.join('|')
+        }
+        for(var i = 0; i < tab_tit.length; i++){
+            tab_tit[i].onclick = (function(i){
+                return function(){
+                    for(var j = 0; j < tab_cont.length; j++){
+                        tab_cont[j].style.display = 'none';
+                        tab_tit[j].style.color = '#999';
+                    }
+                    tab_cont[i].style.display = 'block';
+                    tab_tit[i].style.color = '#000';
+                    history[1] = i;
+                    document.cookie = 'thinkphp_show_page_trace='+history.join('|')
+                }
+            })(i)
+        }
+        parseInt(history[0]) && open.click();
+        tab_tit[history[1]].click();
+    })();
+
+        </script>
+    </body>
+</html>
