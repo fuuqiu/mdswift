@@ -1,202 +1,582 @@
+
+
+
+
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <meta name="author" content="Fuuqiu@gmail.com">
-  <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>07.nil、Nil、NULL、NSNull区别 - Swift快速开发笔记</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "07.nil\u3001Nil\u3001NULL\u3001NSNull\u533a\u522b";
-    var mkdocs_page_input_path = "UI\u4e4b\u7b14/07.nil\u3001Nil\u3001NULL\u3001NSNull\u533a\u522b.md";
-    var mkdocs_page_url = "/UI\u4e4b\u7b14/07.nil\u3001Nil\u3001NULL\u3001NSNull\u533a\u522b/";
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> Swift快速开发笔记</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-  </form>
-</div>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Fuuqiu编写的swift4.0快速开发笔记,使用swift常用框架以及UI配置参数示例">
+      
+      
+      
+        <meta name="author" content="Fuuqiu@gmail.com">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
+    
+    
+      
+        <title>07.nil、Nil、NULL、NSNull区别 - Swift快速开发笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Swift快速开发笔记" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
       </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../..">简介</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">UI之笔</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../00.模拟器截屏/">00.模拟器截屏</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../01.Alamofire网络请求框架/">01.Alamofire网络请求框架</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../02.SwiftyJSON数据解析框架/">02.SwiftyJSON数据解析框架</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../03.TLPhotoPicker多图选择/">03.TLPhotoPicker多图选择</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../04.表单/">04.表单</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../05.闭包使用/">05.闭包使用</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../06.自动布局库SnapKit/">06.自动布局库SnapKit</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">07.nil、Nil、NULL、NSNull区别</a>
-    <ul class="subnav">
             
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../08.DG下拉刷新/">08.DG下拉刷新</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI01. TableView使用/">UI01. TableView使用</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI02.CollectionView/">UI02.CollectionView</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI03.自定义Xib/">UI03.自定义Xib</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI04.顶部菜单按钮/">UI04.顶部菜单按钮</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI05.Button/">UI05.Button</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI06.UISearchBar/">UI06.UISearchBar</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI07.导航栏/">UI07.导航栏</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI08.UIView/">UI08.UIView</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI09.TabBarController/">UI09.TabBarController</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI10.CollectionView/">UI10.CollectionView</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI11.键盘事件监听/">UI11.键盘事件监听</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI12.Page生命周期/">UI12.Page生命周期</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI13.WebView/">UI13.WebView</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI14.ImageView/">UI14.ImageView</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../UI15.布局尺寸示意图/">UI15.布局尺寸示意图</a>
-                </li>
-    </ul>
-	    </li>
+              <span class="md-header-nav__topic">
+                Swift快速开发笔记
+              </span>
+              <span class="md-header-nav__topic">
+                07.nil、Nil、NULL、NSNull区别
+              </span>
+            
           
-        </ul>
+        </div>
       </div>
-      &nbsp;
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">Swift快速开发笔记</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../..">Docs</a> &raquo;</li>
-    
-      
+      <div class="md-flex__cell md-flex__cell--shrink">
         
-          <li>UI之笔 &raquo;</li>
-        
-      
-    
-    <li>07.nil、Nil、NULL、NSNull区别</li>
-    <li class="wy-breadcrumbs-aside">
-      
-        <a href="https://github.com/fuuqiu/mdswift/edit/master/docs/UI之笔/07.nil、Nil、NULL、NSNull区别.md"
-          class="icon icon-github"> Edit on GitHub</a>
-      
-    </li>
-  </ul>
-  <hr/>
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main">
-            <div class="section">
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/fuuqiu/mdswift/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Swift快速开发笔记
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/fuuqiu/mdswift/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="简介" class="md-nav__link">
+      简介
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      UI之笔
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        UI之笔
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../00.模拟器截屏/" title="00.模拟器截屏" class="md-nav__link">
+      00.模拟器截屏
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../01.Alamofire网络请求框架/" title="01.Alamofire网络请求框架" class="md-nav__link">
+      01.Alamofire网络请求框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../02.SwiftyJSON数据解析框架/" title="02.SwiftyJSON数据解析框架" class="md-nav__link">
+      02.SwiftyJSON数据解析框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../03.TLPhotoPicker多图选择/" title="03.TLPhotoPicker多图选择" class="md-nav__link">
+      03.TLPhotoPicker多图选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../04.表单/" title="04.表单" class="md-nav__link">
+      04.表单
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../05.闭包使用/" title="05.闭包使用" class="md-nav__link">
+      05.闭包使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../06.自动布局库SnapKit/" title="06.自动布局库SnapKit" class="md-nav__link">
+      06.自动布局库SnapKit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" title="07.nil、Nil、NULL、NSNull区别" class="md-nav__link md-nav__link--active">
+      07.nil、Nil、NULL、NSNull区别
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../08.DG下拉刷新/" title="08.DG下拉刷新" class="md-nav__link">
+      08.DG下拉刷新
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI01. TableView使用/" title="UI01. TableView使用" class="md-nav__link">
+      UI01. TableView使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI02.CollectionView/" title="UI02.CollectionView" class="md-nav__link">
+      UI02.CollectionView
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI03.自定义Xib/" title="UI03.自定义Xib" class="md-nav__link">
+      UI03.自定义Xib
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI04.顶部菜单按钮/" title="UI04.顶部菜单按钮" class="md-nav__link">
+      UI04.顶部菜单按钮
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI05.Button/" title="UI05.Button" class="md-nav__link">
+      UI05.Button
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI06.UISearchBar/" title="UI06.UISearchBar" class="md-nav__link">
+      UI06.UISearchBar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI07.导航栏/" title="UI07.导航栏" class="md-nav__link">
+      UI07.导航栏
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI08.UIView/" title="UI08.UIView" class="md-nav__link">
+      UI08.UIView
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI09.TabBarController/" title="UI09.TabBarController" class="md-nav__link">
+      UI09.TabBarController
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI10.CollectionView/" title="UI10.CollectionView" class="md-nav__link">
+      UI10.CollectionView
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI11.键盘事件监听/" title="UI11.键盘事件监听" class="md-nav__link">
+      UI11.键盘事件监听
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI12.Page生命周期/" title="UI12.Page生命周期" class="md-nav__link">
+      UI12.Page生命周期
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI13.WebView/" title="UI13.WebView" class="md-nav__link">
+      UI13.WebView
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI14.ImageView/" title="UI14.ImageView" class="md-nav__link">
+      UI14.ImageView
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../UI15.布局尺寸示意图/" title="UI15.布局尺寸示意图" class="md-nav__link">
+      UI15.布局尺寸示意图
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
+                
+                  <a href="https://github.com/fuuqiu/mdswift/edit/master/docs/UI之笔/07.nil、Nil、NULL、NSNull区别.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>07.nil、Nil、NULL、NSNull区别</h1>
+                
                 <p><strong>nil、Nil、NULL、NSNull区别</strong>
 我们都知道nil、Nil、NULL、NSNull都表示为空但是究竟有什么区别，相信大家也很少关注。今天我们就浅聊一下这几个空的区别</p>
 <p><strong>1、nil</strong></p>
@@ -208,57 +588,88 @@
 <p>既：int *p  = NULL</p>
 <p><strong>4、NSNull</strong></p>
 <p>NSNull很有意思，大家一般都会觉得，NSNull也是空，但是看着这货又是“NS”开头的很像一个对象，实质上NSNull的确是一个对象，他继承于NSObject。那它和nil的区别在哪里呢？nil是把一对象完全释放，就是完全从内存中释放。但是当我想把一个对象置空但是又想要一个容器的时候，我们就可以使用NSNull。比如一瓶矿泉水，我们不想要里面的水，但是我们想保留瓶子一样。看一下代码的区别</p>
+                
+                  
+                
               
-            </div>
+              
+                
+
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../08.DG下拉刷新/" class="btn btn-neutral float-right" title="08.DG下拉刷新">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../06.自动布局库SnapKit/" class="btn btn-neutral" title="06.自动布局库SnapKit"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../06.自动布局库SnapKit/" title="06.自动布局库SnapKit" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                06.自动布局库SnapKit
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../08.DG下拉刷新/" title="08.DG下拉刷新" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                08.DG下拉刷新
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-    
-      <p>Email:Fuuqiu@gmail.com </br> 支持提供优化方案</p>
-    
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Email:Fuuqiu@gmail.com </br> 支持提供优化方案
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
   </div>
-
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+    </div>
+    
+      <script src="../../assets/javascripts/application.a59e2a89.js"></script>
       
-          <a href="https://github.com/fuuqiu/mdswift/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       
+    
+    
       
-        <span><a href="../06.自动布局库SnapKit/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../08.DG下拉刷新/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
-</div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/require.js"></script>
-      <script src="../../search/search.js"></script>
-
-</body>
+    
+  </body>
 </html>

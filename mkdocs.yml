@@ -1,5 +1,5 @@
 site_name: Swift快速开发笔记 
-theme: readthedocs
+theme: material
 repo_url: https://github.com/fuuqiu/mdswift
 copyright:  Email:Fuuqiu@gmail.com </br> 支持提供优化方案
 site_description: Fuuqiu编写的swift4.0快速开发笔记,使用swift常用框架以及UI配置参数示例
